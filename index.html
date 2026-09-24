@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebMCP Playground</title>
+    <!-- Inline so the browser's automatic /favicon.ico probe never 404s. -->
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'&gt;&lt;text y='14' font-size='14'&gt;🔧&lt;/text&gt;&lt;/svg&gt;" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>WebMCP Playground</h1>
+      <p>
+        Execute tools by hand in the <strong>inspector</strong>, or press
+        <em>Simulate agent traffic</em> to fire a burst of calls the way an agent would.
+        Everything lands in <strong>analytics</strong> on the right.
+      </p>
+      <div class="actions">
+        <button id="simulate">▶ Simulate agent traffic</button>
+        <button id="register-late">+ Register a tool now</button>
+        <button id="unregister">− Remove search_products</button>
+        <span id="status" role="status"></span>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h2>Inspector <code>&lt;machvive-webmcp-inspect&gt;</code></h2>
+        <machvive-webmcp-inspect></machvive-webmcp-inspect>
+      </section>
+      <section>
+        <h2>Analytics <code>&lt;machvive-webmcp-analytics&gt;</code></h2>
+        <machvive-webmcp-analytics></machvive-webmcp-analytics>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        A floating inspector is also mounted — look for the 🔧 button in the corner.
+      </p>
+    </footer>
+    <machvive-webmcp-inspect floating></machvive-webmcp-inspect>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

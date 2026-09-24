@@ -1,0 +1,26 @@
+{
+  "name": "webmcp-playground",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "verify": "node verify.mjs"
+  },
+  "dependencies": {
+    "@machfivetechchicago/machvive-webmcp-ai": "^5.7.2"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0",
+    "vite": "^7.0.0"
+  },
+  "description": "A live WebMCP endpoint for exercising agent tool calls, and a reference integration of the machvive components.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mach-Five-Group/webmcp-playground.git"
+  },
+  "homepage": "https://mach-five-group.github.io/webmcp-playground/",
+  "license": "Apache-2.0"
+}
