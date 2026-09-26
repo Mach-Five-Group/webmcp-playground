@@ -95,6 +95,13 @@ which stays empty.
 serves project sites from `/<repo>/`. Without it every asset 404s and the page
 loads blank. On a custom domain serving from root, set `PAGES_BASE=/`.
 
+## The rest of the ecosystem
+
+| | |
+| --- | --- |
+| [machvive-webmcp-ai](https://github.com/Mach-Five-Group/machvive-webmcp-ai) | The components this page is built from — polyfill, inspector, analytics, magnet bridge |
+| [webmcp-browser-use](https://github.com/Mach-Five-Group/webmcp-browser-use) | Point a real AI agent at this page and watch it call the tools |
+
 ## License
 
 [Apache-2.0](LICENSE) © MachFiveTech Chicago
