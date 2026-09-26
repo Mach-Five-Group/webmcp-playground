@@ -10,7 +10,7 @@
     "verify": "node verify.mjs"
   },
   "dependencies": {
-    "@machfivetechchicago/machvive-webmcp-ai": "^5.7.2"
+    "@machfivetechchicago/machvive-webmcp-ai": "^5.7.3"
   },
   "devDependencies": {
     "playwright": "^1.63.0",
