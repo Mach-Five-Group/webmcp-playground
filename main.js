@@ -7,6 +7,10 @@
  */
 import '@machfivetechchicago/machvive-webmcp-ai/webmcp-analytics';
 import '@machfivetechchicago/machvive-webmcp-ai/webmcp-inspect';
+// Importing this registers the element, which publishes generate_placeholder_text
+// the moment one is connected. Nothing below registers it by hand — that is the
+// point of having it here.
+import '@machfivetechchicago/machvive-webmcp-ai/lorum-ipsum';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -17,8 +21,6 @@ const CATALOG = {
 };
 
 const cart = [];
-/** Applied discount, as a fraction. apply_coupon sets it; view_cart honours it. */
-let discount = 0;
 
 /** Tools a storefront might expose, with varied schemas to exercise the form builder. */
 const TOOLS = [
@@ -70,12 +72,8 @@ const TOOLS = [
     execute: async () => {
       await sleep(15);
       if (!cart.length) return 'Cart is empty.';
-      const subtotal = cart.reduce((sum, i) => sum + CATALOG[i.sku].price * i.qty, 0);
-      const total = subtotal * (1 - discount);
-      return discount
-        ? `${cart.length} line(s), subtotal $${subtotal.toFixed(2)}, ` +
-          `discount ${discount * 100}%, total $${total.toFixed(2)}`
-        : `${cart.length} line(s), total $${subtotal.toFixed(2)}`;
+      const total = cart.reduce((sum, i) => sum + CATALOG[i.sku].price * i.qty, 0);
+      return `${cart.length} line(s), total $${total}`;
     }
   },
   {
@@ -89,7 +87,6 @@ const TOOLS = [
     execute: async ({ code }) => {
       await sleep(25);
       if (code !== 'MACHFIVE') throw new Error(`Coupon "${code}" is not valid.`);
-      discount = 0.15;
       return 'Coupon applied: 15% off.';
     }
   },
@@ -111,6 +108,11 @@ const TOOLS = [
 ];
 
 navigator.modelContext.provideContext({ tools: TOOLS });
+
+// provideContext replaces the *whole* toolset, which includes anything an element
+// published when it connected. That is what the spec says it does, so the page
+// asks for the placeholder tool back rather than the component fighting for it.
+document.querySelector('machvive-lorum-ipsum')?.publishTool();
 
 const status = document.getElementById('status');
 const say = (msg) => {

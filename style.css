@@ -20,3 +20,8 @@ section { background: #fff; border: 1px solid #e3e3e3; border-radius: 10px; padd
 h2 { margin: 0 0 10px; font-size: 14px; font-weight: 600; }
 h2 code { font-weight: 400; color: #777; font-size: 12px; }
 footer { margin-top: 20px; color: #777; font-size: 13px; }
+
+/* The placeholder section runs the full width under the two panels. */
+.span { grid-column: 1 / -1; }
+.span .note { margin: 0 0 0.75rem; max-width: 46rem; opacity: 0.85; }
+machvive-lorum-ipsum { display: block; max-width: 46rem; }

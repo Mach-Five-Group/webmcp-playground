@@ -14,7 +14,9 @@
       <p>
         Execute tools by hand in the <strong>inspector</strong>, or press
         <em>Simulate agent traffic</em> to fire a burst of calls the way an agent would.
-        Everything lands in <strong>analytics</strong> on the right.
+        Everything lands in <strong>analytics</strong> on the right. The quickest
+        thing to try is <code>generate_placeholder_text</code>, which comes from the
+        placeholder block at the bottom of this page.
       </p>
       <div class="actions">
         <button id="simulate">▶ Simulate agent traffic</button>
@@ -32,6 +34,17 @@
       <section>
         <h2>Analytics <code>&lt;machvive-webmcp-analytics&gt;</code></h2>
         <machvive-webmcp-analytics></machvive-webmcp-analytics>
+      </section>
+      <section class="span">
+        <h2>Placeholder copy <code>&lt;machvive-lorum-ipsum&gt;</code></h2>
+        <p class="note">
+          This element publishes <code>generate_placeholder_text</code> by simply
+          being on the page — no tool written by hand. Find it in the inspector
+          above, choose a language, set a sentence count, and run it. The copy
+          below changes. That is the whole WebMCP loop: an agent calls a named,
+          schema-typed function, and your page does something.
+        </p>
+        <machvive-lorum-ipsum lang="english" sentences="3"></machvive-lorum-ipsum>
       </section>
     </main>
 

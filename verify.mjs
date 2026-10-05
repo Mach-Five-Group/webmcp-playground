@@ -1,11 +1,7 @@
 import { chromium } from 'playwright';
 
-// Defaults to a local preview; point it at the deployed site to check that what
-// is actually published still works:
-//   node verify.mjs --url=https://mach-five-group.github.io/webmcp-playground/
-const TARGET =
-  process.argv.find((a) => a.startsWith('--url='))?.slice('--url='.length) ??
-  'http://localhost:4173/';
+// Overridable so this can audit a deployed build, not only a local preview.
+const URL_UNDER_TEST = process.env.PLAYGROUND_URL ?? 'http://localhost:4173/';
 
 const browser = await chromium.launch({ channel: 'chrome' });
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
@@ -13,12 +9,11 @@ const errors = [];
 page.on('pageerror', (e) => errors.push(String(e)));
 page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
 
-await page.goto(TARGET, { waitUntil: 'networkidle' });
+await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
 
 const inspect = page.locator('main machvive-webmcp-inspect');
 const analytics = page.locator('machvive-webmcp-analytics');
 
-console.log('target:', TARGET);
 console.log('secure context:', await page.evaluate(() => window.isSecureContext));
 console.log('polyfill installed:', await page.evaluate(() => 'modelContext' in navigator));
 console.log('tools registered:', await page.evaluate(() => navigator.modelContext.tools.map(t => t.name).join(', ')));
