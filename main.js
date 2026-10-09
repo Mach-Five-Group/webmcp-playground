@@ -11,6 +11,7 @@ import '@machfivetechchicago/machvive-webmcp-ai/webmcp-inspect';
 // the moment one is connected. Nothing below registers it by hand — that is the
 // point of having it here.
 import '@machfivetechchicago/machvive-webmcp-ai/lorum-ipsum';
+import '@machfivetechchicago/machvive-webmcp-ai/webmcp-products';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -164,3 +165,24 @@ document.getElementById('unregister').addEventListener('click', () => {
 
 // Handy for poking at things from devtools.
 globalThis.mcp = navigator.modelContext;
+
+
+/* ------------------------------------------------- products from JSON-LD */
+
+const products = document.querySelector('machvive-webmcp-products');
+
+// provideContext above replaced the whole toolset, so the element's tools went
+// with it. Ask for them back, the same way the placeholder component does.
+await products.load();
+
+document.getElementById('products-remote').addEventListener('click', async () => {
+  products.src = './products.json';
+  await products.load();
+  say(`Loaded ${products.products.length} products from products.json — re-open search_products to see the new filters`);
+});
+
+document.getElementById('products-page').addEventListener('click', async () => {
+  products.src = null;
+  await products.load();
+  say(`Back to this page's own JSON-LD — ${products.products.length} products`);
+});
