@@ -6,7 +6,7 @@
     <title>WebMCP Playground</title>
     <!-- Inline so the browser's automatic /favicon.ico probe never 404s. -->
     <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'&gt;&lt;text y='14' font-size='14'&gt;🔧&lt;/text&gt;&lt;/svg&gt;" />
-    <script type="module" crossorigin src="./assets/index-CISW0wQH.js"></script>
+    <script type="module" crossorigin src="./assets/index-BRdAUR0-.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-hU3tUHSY.css">
   </head>
   <body>
@@ -37,6 +37,29 @@
         <machvive-webmcp-analytics></machvive-webmcp-analytics>
       </section>
       <section class="span">
+        <h2>Products from JSON-LD <code>&lt;machvive-webmcp-products&gt;</code></h2>
+        <p class="note">
+          This page carries ordinary schema.org <code>Product</code> markup — the
+          same JSON-LD a site already publishes so search engines understand its
+          catalogue. The component reads it and exposes
+          <code>search_products</code>, <code>get_product</code> and
+          <code>list_product_facets</code>. Nothing was written by hand, and
+          there is no backend.
+        </p>
+        <p class="note">
+          Look at <code>search_products</code> in the inspector: its
+          <em>category</em> and <em>brand</em> fields are dropdowns, because the
+          allowed values were derived from this page's own data. An agent never
+          has to guess a category name. The tools are read-only — they search and
+          read, never add to a cart.
+        </p>
+        <div class="actions">
+          <button id="products-remote">Load a different catalogue (src)</button>
+          <button id="products-page">Read this page's JSON-LD</button>
+        </div>
+        <machvive-webmcp-products></machvive-webmcp-products>
+      </section>
+      <section class="span">
         <h2>Placeholder copy <code>&lt;machvive-lorum-ipsum&gt;</code></h2>
         <p class="note">
           This element publishes <code>generate_placeholder_text</code> by simply
@@ -55,6 +78,88 @@
       </p>
     </footer>
     <machvive-webmcp-inspect floating></machvive-webmcp-inspect>
+
+    <!-- Ordinary SEO markup. The component reads this; nothing here is
+         WebMCP-specific, which is the entire point of the component. -->
+    <script type="application/ld+json">
+    {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "name": "Mach Five Tech store",
+          "numberOfItems": 3,
+          "itemListElement": [
+                {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "item": {
+                            "@type": "Product",
+                            "name": "Mach Five Tee",
+                            "description": "Heavyweight cotton tee, screen printed in Chicago.",
+                            "sku": "M5T-001",
+                            "brand": {
+                                  "@type": "Brand",
+                                  "name": "Mach Five Tech"
+                            },
+                            "category": "Apparel",
+                            "url": "https://example.com/products/m5t-001",
+                            "offers": {
+                                  "@type": "Offer",
+                                  "priceCurrency": "USD",
+                                  "price": "28.00",
+                                  "availability": "https://schema.org/InStock",
+                                  "itemCondition": "https://schema.org/NewCondition"
+                            }
+                      }
+                },
+                {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "item": {
+                            "@type": "Product",
+                            "name": "Chicago Hoodie",
+                            "description": "Fleece-lined pullover hoodie with an embroidered mark.",
+                            "sku": "M5T-002",
+                            "brand": {
+                                  "@type": "Brand",
+                                  "name": "Mach Five Tech"
+                            },
+                            "category": "Apparel",
+                            "url": "https://example.com/products/m5t-002",
+                            "offers": {
+                                  "@type": "Offer",
+                                  "priceCurrency": "USD",
+                                  "price": "64.00",
+                                  "availability": "https://schema.org/InStock",
+                                  "itemCondition": "https://schema.org/NewCondition"
+                            }
+                      }
+                },
+                {
+                      "@type": "ListItem",
+                      "position": 3,
+                      "item": {
+                            "@type": "Product",
+                            "name": "Vive Cap",
+                            "description": "Six-panel cap, adjustable strap, low profile.",
+                            "sku": "M5T-003",
+                            "brand": {
+                                  "@type": "Brand",
+                                  "name": "Mach Five Tech"
+                            },
+                            "category": "Accessories",
+                            "url": "https://example.com/products/m5t-003",
+                            "offers": {
+                                  "@type": "Offer",
+                                  "priceCurrency": "USD",
+                                  "price": "22.00",
+                                  "availability": "https://schema.org/OutOfStock",
+                                  "itemCondition": "https://schema.org/NewCondition"
+                            }
+                      }
+                }
+          ]
+    }
+    </script>
 
   </body>
 </html>
